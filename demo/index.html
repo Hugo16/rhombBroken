@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>破碎</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        #content {
+            width: 1000px;
+            height: 1000px;
+            position: relative;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        img{
+            width: 400px;
+        }
+    </style>
+    <script src="../rhombBroken.js"></script>
+</head>
+<body>
+<div id="content">
+    <img src="demo.jpg"/>
+</div>
+<script>
+    let img = document.getElementsByTagName("img")[0];
+
+    rhombBroken(img, {}, function (img) {
+        img.style.opacity = 1;
+    });
+</script>
+</body>
