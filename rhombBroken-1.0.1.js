@@ -10,10 +10,10 @@
      * option:rotate:旋转角度 默认 360
      * @param callBack 回调函数
      */
-    function rhombBroken(img, option,callBack) {
+    function rhombBroken(img, option, callBack) {
         option = option || {};
         img.onload = function () {
-            let
+            var
                 // 宽高等分数
                 dWidth = option.dWidth > 25 ? 10 : (option.dWidth || 10),
                 dHeight = option.dHeight > 25 ? 10 : (option.dHeight || 10),
@@ -31,12 +31,12 @@
                 contentDiv = document.createElement("div");
 
             // 计算点的位置
-            for (let i = -1; i <= yI; i++) {
+            for (var i = -1; i <= yI; i++) {
                 // 保存每一行点的数组
-                let levelArr = [];
+                var levelArr = [];
                 // 计算每一行点的位置
-                for (let j = -1; j <= xI; j++) {
-                    let point = [
+                for (var j = -1; j <= xI; j++) {
+                    var point = [
                         j * (rX + Math.random() * rX / zoomX - rX / (2 * zoomX)) - rX / 2,
                         i * (rY + Math.random() * rY / zoomY - rY / (2 * zoomY)) - rY / 2
                     ];
@@ -53,15 +53,15 @@
                 img.onclick = function () {
                 };
 
-                let e = event || window.event;
+                var e = event ||window.event;
 
                 img.style.opacity = 0;
 
                 // 画菱形
-                for (let j = 0; j < allArr.length - 2; j++) {
-                    let num = j % 2 ? 2 : 1;
-                    for (let i = num; i < allArr[j].length - 1; i += 2) {
-                        let topPointY = allArr[j][i][1],
+                for (var j = 0; j < allArr.length - 2; j++) {
+                    var num = j % 2 ? 2 : 1;
+                    for (var i = num; i < allArr[j].length - 1; i += 2) {
+                        var topPointY = allArr[j][i][1],
                             bottomPointY = allArr[j + 2][i][1],
                             leftPointX = allArr[j + 1][i - 1][0],
                             rightPointX = allArr[j + 1][i + 1][0];
@@ -71,8 +71,8 @@
                         if (topPointY > img.height) {
                             continue;
                         }
-                        let canvas = document.createElement("canvas");
-                        let ctx = canvas.getContext("2d");
+                        var canvas = document.createElement("canvas");
+                        var ctx = canvas.getContext("2d");
                         canvas.width = img.width;
                         canvas.height = img.height;
 
@@ -95,8 +95,8 @@
                         ctx.restore();
 
                         // 裁剪这个小菱形出来
-                        let realCanvas = document.createElement("canvas");
-                        let realCtx = realCanvas.getContext("2d");
+                        var realCanvas = document.createElement("canvas");
+                        var realCtx = realCanvas.getContext("2d");
                         option.time = option.time > 2 ? 2 : (option.time < 0 ? 1 : option.time || 1);
                         realCanvas.width = rightPointX - leftPointX;
                         realCanvas.height = bottomPointY - topPointY;
@@ -108,28 +108,30 @@
 
                         contentDiv.appendChild(realCanvas);
 
-                        setTimeout(function () {
-                            let flyOffset = option.flyOffset || 1500;
-                            realCanvas.style.transform = "scale(2) rotateX(" + option.rotate || 360 + "deg)";
-                            if (leftPointX > e.offsetX) {
-                                realCanvas.style.left = leftPointX + Math.random() * flyOffset + "px";
-                            }
-                            else {
-                                realCanvas.style.left = leftPointX - Math.random() * flyOffset + "px";
-                            }
-                            if (topPointY > e.offsetY) {
-                                realCanvas.style.top = topPointY + Math.random() * flyOffset + "px";
-                            }
-                            else {
-                                realCanvas.style.top = topPointY - Math.random() * flyOffset + "px";
-                            }
-                            realCanvas.style.opacity = 0;
-                        }, 1);
+                        (function (realCanvas,leftPointX,topPointY) {
+                            setTimeout(function () {
+                                var flyOffset = option.flyOffset || 1500;
+                                realCanvas.style.transform = "scale(2) rotateX(" + option.rotate || 360 + "deg)";
+                                if (leftPointX > e.offsetX) {
+                                    realCanvas.style.left = leftPointX + Math.random() * flyOffset + "px";
+                                }
+                                else {
+                                    realCanvas.style.left = leftPointX - Math.random() * flyOffset + "px";
+                                }
+                                if (topPointY > e.offsetY) {
+                                    realCanvas.style.top = topPointY + Math.random() * flyOffset + "px";
+                                }
+                                else {
+                                    realCanvas.style.top = topPointY - Math.random() * flyOffset + "px";
+                                }
+                                realCanvas.style.opacity = 0;
+                            }, 1)
+                        })(realCanvas,leftPointX,topPointY,e);
                     }
                 }
                 setTimeout(function () {
                     contentDiv.parentNode.removeChild(contentDiv);
-                    if(callBack){
+                    if (callBack) {
                         callBack(img);
                     }
                 }, option.time * 1000 + 1000)
@@ -138,12 +140,12 @@
     }
 
     function getOffsetTop(obj) {
-        let offsetTop = obj.offsetTop || 0;
+        var offsetTop = obj.offsetTop || 0;
         return offsetTop + (obj.parentNode !== null ? getOffsetTop(obj.parentNode) : 0)
     }
 
     function getOffsetLeft(obj) {
-        let offsetLeft = obj.offsetLeft || 0;
+        var offsetLeft = obj.offsetLeft || 0;
         return offsetLeft + (obj.parentNode !== null ? getOffsetLeft(obj.parentNode) : 0)
     }
 
