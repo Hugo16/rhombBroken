@@ -31,3 +31,5 @@
      	*rotate:*旋转角度 默认 360
 
 	**callBack:** 回调函数(Function)
+	
+- 兼容 IE10+
