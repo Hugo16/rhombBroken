@@ -10,7 +10,7 @@
         img.style.opacity = 1;
     });`
 
-	[点击查看](http://rhombBroken.xiexiaoguo.com/demo/index.html "rhombBroken示例")
+	[点击查看](https://hugo16.github.io/rhombBroken/demo/index.html "rhombBroken示例")
 
 - 参数介绍
 
